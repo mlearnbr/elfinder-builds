@@ -2454,7 +2454,9 @@ abstract class elFinderVolumeDriver {
 		
 		if ($tmpdir = $this->getTempPath()) {
 			if (!$rmfunc) {
-				$rmfunc = create_function('$f', '@unlink($f);');
+				$rmfunc = function ($f) {
+					@unlink($f);
+				};
 			}
 			$name = tempnam($tmpdir, 'ELF');
 			if ($key) {
